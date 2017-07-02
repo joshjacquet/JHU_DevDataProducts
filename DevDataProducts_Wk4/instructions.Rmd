@@ -1,0 +1,14 @@
+---
+title: "Instructions"
+author: "Josh Jacquet"
+date: "July 2, 2017"
+output: html_document
+---
+
+# Instructions for Cars Exploration Shiny App
+
+This Shiny app is simple. It is designed to do a few explorations of the *mtcars* dataset, and meets the requirements for the Week 4 project of Developing Data Products through Coursera.
+
+Again - very simple. On the next page, you will select as many or as few car makes as you'd like. There are two plots and a table for you to review, which provide some visual representations of the relationship between horsepower and miles per hour, as well as the number of cars by horsepower range in a histogram.
+
+Enjoy.
