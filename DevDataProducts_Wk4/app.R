@@ -11,13 +11,15 @@ data$makemodel <- rownames(data)
 data$make <- gsub( " .*$", "", data$makemodel)
 
 ui <- navbarPage("Car Exploration",
-                 tabPanel("Instructions", fluidPage(
-                         htmlOutput("instructions"))),
-                 
+                 #tabPanel("Instructions", fluidPage(
+                 #        textOutput("instr"))),
+
                  tabPanel("App", fluidPage(
-        titlePanel(h1("Car Dataset Exploration")),
+        titlePanel(h1("Car Dataset Exploration"),
+                   h3("This App was built to explore the mtcars dataset, which contains data from the 1974 Motor Trend US magazine. Please select your choice of car makes to explore the dataset.")),
         sidebarLayout(
                 sidebarPanel(
+                        textOutput("instr"),
                         selectInput("make", "Car Make (Select as many as desired)"
                                     , choices = data$make, multiple = TRUE
                                     , selected = c("Mazda", "Toyota", "Ferrari", "Honda"))
@@ -32,7 +34,6 @@ ui <- navbarPage("Car Exploration",
         )
 )
 )
-
 server <- function(input, output) {
         output$MPGvHP <- renderPlot({
                 filtered <- data %>%
@@ -58,10 +59,15 @@ server <- function(input, output) {
                         print(filtered)
         })
         
-        output$instructions <- renderText({
-                readLines("instructions.html")
+        output$instr <- renderText({
+                print("This App was built to explore the mtcars dataset, which contains data from the 1974 Motor Trend US magazine. Please select your choice of car makes to explore the dataset.")
         })
         
+        getPage <- function () {
+                return(includeHTML("instructions.html"))}
+        output$instructions <- renderUI({getPage()})
+
+
 }
 
 shinyApp(ui = ui, server = server)
